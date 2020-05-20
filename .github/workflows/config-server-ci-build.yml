@@ -1,4 +1,4 @@
-name: Build
+name: Build and Push to Docker
 
 on:
   push:
@@ -11,9 +11,9 @@ on:
 
 jobs:
 
-  build:
-    name: Build
-    runs-on: ubuntu-18.04
+  build_maven:
+    name: Build maven
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v1
@@ -23,3 +23,10 @@ jobs:
           java-version: 8
       - name: Clean install MAVEN
         run: mvn -B clean install
+
+  build_docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Build the docker image from local Dockerfile
+        run: docker build -t $REPO:latest -t $REPO:${GITHUB_SHA::8} .
