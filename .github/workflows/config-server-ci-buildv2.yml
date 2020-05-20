@@ -1,4 +1,4 @@
-name: Build
+name: Build V2
 
 on:
   push:
