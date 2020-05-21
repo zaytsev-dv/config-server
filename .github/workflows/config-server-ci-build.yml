@@ -38,7 +38,7 @@ jobs:
 
           fi
 
-      - name: Docker build
+      - name: Docker build2
         run: |
           printenv
 
