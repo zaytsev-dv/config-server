@@ -28,12 +28,12 @@ jobs:
 
       - name: set ENV
         run: |
-          if [ "$GITHUB_REF" == "refs/heads/master" ] then
+          if [ "$GITHUB_REF" == "refs/heads/master" ]; then
              echo "Create PRODUCTION image"
              echo "::set-env name=APP_POLYGON::prod"
           fi
 
-          if [ "$GITHUB_REF" == "refs/heads/dev" ] then
+          if [ "$GITHUB_REF" == "refs/heads/dev" ]; then
               echo "Create DEVELOP image"
               echo "::set-env name=APP_POLYGON::dev"
           fi
