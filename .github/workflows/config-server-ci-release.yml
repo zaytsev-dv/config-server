@@ -11,13 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Extract branch name
-        shell: bash
-        run: echo "::set-env name=BRANCH_NAME::${GITHUB_REF##*/}"
+        run: |
+        echo "::set-env name=BRANCH_NAME::${GITHUB_REF##*/}"
+
       - name: Print ENV
         run: |
           printenv
+
       - name: Checkout code
         uses: actions/checkout@v2
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
