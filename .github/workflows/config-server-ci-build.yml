@@ -37,7 +37,10 @@ jobs:
       - name: Create and push image
         run: |
           echo "::set-env name=DOCKER_IMAGE_TAG=$APP_POLYGON-${GITHUB_SHA:0:8}"
-          echo "Docker image tag is: ${DOCKER_IMAGE_TAG}"
+          docker build \
+                    --file ./Dockerfile -t config-server-${APP_POLYGON}:latest .
+                    docker tag config-server-${APP_POLYGON}:latest ${DOCKER_REPO_CONFIG_SERVER}:${DOCKER_IMAGE_TAG}
+                    docker push ${DOCKER_REPO_CONFIG_SERVER}:${DOCKER_IMAGE_TAG}
 
 
 
