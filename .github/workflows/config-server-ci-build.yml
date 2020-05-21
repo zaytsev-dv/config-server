@@ -6,8 +6,8 @@ on:
       - dev
   pull_request:
     branches:
-      - dev
       - master
+      - dev
 
 jobs:
 
@@ -37,7 +37,6 @@ jobs:
           echo "::set-env name=APP_POLYGON::dev"
 
           fi
-          echo "::set-env name=PROJECT_NAME::config-server"
 
       - name: Docker build
         run: docker build -t ${{ secrets.DOCKER_REPO_CONFIG_SERVER }}:${APP_POLYGON}-latest .
