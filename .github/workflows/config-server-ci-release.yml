@@ -25,7 +25,7 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Login to Docker Hub
+      - name: Login to Docker Hub2
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Docker build
