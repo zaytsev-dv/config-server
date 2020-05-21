@@ -34,4 +34,4 @@ jobs:
         run: echo "Tags are > ${APP_POLYGON}"
 
       - name: Build the docker image from local Dockerfile
-        run: docker build -t ${APP_POLYGON}:latest .
+        run: docker build -t ${APP_POLYGON} .
