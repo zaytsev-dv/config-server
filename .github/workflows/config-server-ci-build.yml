@@ -43,6 +43,8 @@ jobs:
           fi
           echo "::set-env name=PROJECT_NAME::config-server"
 
+      - name: Docker build
+        run: docker build -t ${{ secrets.DOCKER_REPO_CONFIG_SERVER }}:latest .
 
       - name: Create and push image
         run: |
