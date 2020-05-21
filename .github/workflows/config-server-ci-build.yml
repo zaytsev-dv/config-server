@@ -1,4 +1,4 @@
-name: Build and Push to Docker
+name: Build maven
 
 on:
   pull_request:
