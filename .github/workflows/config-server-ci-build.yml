@@ -46,6 +46,5 @@ jobs:
       - name: Docker build
         run: docker build -t ${{ secrets.DOCKER_REPO_CONFIG_SERVER }}:latest .
 
-      - name: Create and push image
-        run: |
-          printenv
+      - name: Push image to Docker hub
+        run: docker push ${{ secrets.DOCKER_REPO_CONFIG_SERVER }}:latest
