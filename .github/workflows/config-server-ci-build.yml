@@ -26,15 +26,10 @@ jobs:
 
       - name: set APP_POLYGON
         run: |
-          if [ endsWith(github.ref, '/master') = "master" ]; then
-              echo "Create PRODUCTION image"
-              APP_POLYGON=prod
-          else
-              echo "Create DEVELOP image"
-              APP_POLYGON=dev
-          fi"
+          if [[ endsWith(github.ref, '/dev') = "dev" ]]; then
+             echo "Create DEVELOP image"
+          fi
 
-      - name: Build the docker image
-        run: docker build -t ${APP_POLYGON}:latest .
+
 
 
