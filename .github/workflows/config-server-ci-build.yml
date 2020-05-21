@@ -35,9 +35,8 @@ jobs:
           fi
 
       - name: Create and push image
-        with:
-          PROJECT_NAME: 'config-server'
         run: |
+          echo "::set-env name=PROJECT_NAME="config-server"-${APP_POLYGON}"
           echo "::set-env name=DOCKER_LOCAL_IMAGE_NAME=${PROJECT_NAME}-${APP_POLYGON}"
           echo "::set-env name=DOCKER_IMAGE_TAG=${APP_POLYGON}-${GITHUB_SHA:0:8}"
           docker build \
