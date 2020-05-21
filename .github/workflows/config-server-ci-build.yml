@@ -43,4 +43,6 @@ jobs:
 
 
       - name: Create and push image
-        run: docker build -t ${{ secrets.DOCKER_REPO_CONFIG_SERVER }}:latest . docker push ${{ secrets.DOCKER_REPO_CONFIG_SERVER }}:latest
+        run: |
+          echo "$DOCKER_REPO_CONFIG_SERVER"
+          printenv
