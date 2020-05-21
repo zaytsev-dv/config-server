@@ -24,9 +24,6 @@ jobs:
         with:
           java-version: 8
 
-      - name: Login to Docker Hub
-        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
-
       - name: set ENV
         run: |
           if [[ "$GITHUB_REF" == "refs/heads/master" ]]; then
@@ -40,12 +37,16 @@ jobs:
           echo "::set-env name=APP_POLYGON::dev"
           fi
 
-      - name: Docker build
-        run: docker build -t ${{ secrets.DOCKER_REPO_CONFIG_SERVER }}:latest .
-
-      - name: Create and push image
+      - name: print all ENV
         run: |
           printenv
+
+      - name: Login to Docker Hub
+          run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Docker build
+        run: docker build -t ${{ secrets.DOCKER_REPO_CONFIG_SERVER }}:${APP_POLYGON}-latest .
+
       - name: Push image to Docker hub
-        run: docker push ${{ secrets.DOCKER_REPO_CONFIG_SERVER }}:latest
+        run: docker push ${{ secrets.DOCKER_REPO_CONFIG_SERVER }}:${APP_POLYGON}-latest
 
