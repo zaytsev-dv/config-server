@@ -24,8 +24,9 @@ jobs:
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: set APP_POLYGON
+      - name: set ENV
         run: |
+          echo "::set-env name=PROJECT_NAME::config-server"
           if [[ "github.ref" == "refs/heads/master" ]]; then
              echo "Create PRODUCTION image"
              echo "::set-env name=APP_POLYGON::prod"
@@ -36,7 +37,6 @@ jobs:
 
       - name: Create and push image
         run: |
-          echo "::set-env name=PROJECT_NAME::config-server"
           echo "::set-env name=DOCKER_LOCAL_IMAGE_NAME=${PROJECT_NAME}-${APP_POLYGON}"
           echo "::set-env name=DOCKER_IMAGE_TAG=${APP_POLYGON}-${GITHUB_SHA:0:8}"
           docker build \
