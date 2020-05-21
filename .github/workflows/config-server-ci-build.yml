@@ -37,6 +37,9 @@ jobs:
       - name: Build the docker image
         run: docker build -t ${APP_POLYGON}:latest .
 
+      - name: Push to docker hub
+        run: docker push ${{ DOCKER_REPO_CONFIG_SERVER }}
+
 
 
 
