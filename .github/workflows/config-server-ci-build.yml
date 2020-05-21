@@ -28,17 +28,23 @@ jobs:
 
       - name: set ENV
         run: |
-          if [ "github.ref" == "refs/heads/master" ] then
+          if [ "$GITHUB_REF" == "refs/heads/master" ] then
              echo "Create PRODUCTION image"
              echo "::set-env name=APP_POLYGON::prod"
-
-          else
-          echo "Create DEVELOP image"
-          echo "::set-env name=APP_POLYGON::dev"
-
           fi
 
-      - name: Docker build2
+          if [ "$GITHUB_REF" == "refs/heads/dev" ] then
+              echo "Create DEVELOP image"
+              echo "::set-env name=APP_POLYGON::dev"
+          fi
+
+      - name: Print ENV
         run: |
           printenv
+
+      - name: Docker build
+        run: docker build -t ${{ secrets.DOCKER_REPO_CONFIG_SERVER }}:${APP_POLYGON}-latest .
+
+      - name: Docker push
+        run: docker push ${{ secrets.DOCKER_REPO_CONFIG_SERVER }}:${APP_POLYGON}-latest
 
