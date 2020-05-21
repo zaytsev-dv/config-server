@@ -17,11 +17,11 @@ jobs:
     steps:
       - name: Set env to staging
         if: endsWith(github.ref, '/dev')
-        run: |
-          echo "::set-env name=APP_POLYGON::dev"
+        env:
+          APP_POLYGON: "dev"
       - name: Set env to production
         if: endsWith(github.ref, '/master')
-        run: |
-          echo "::set-env name=APP_POLYGON::release"
+        env:
+          APP_POLYGON: "release"
       - name: Build the docker image from local Dockerfile
         run: docker build -t config-server-${APP_POLYGON}:latest .
