@@ -31,3 +31,6 @@ jobs:
       - name: set APP_POLYGON to PROD
         if: endsWith(github.ref, '/master')
         run: echo "::set-env name=APP_POLYGON::prod"
+
+      - name: Build the docker image
+        run: docker build -t ${APP_POLYGON}:latest .
