@@ -23,5 +23,6 @@ jobs:
         if: endsWith(github.ref, '/master')
         env:
           APP_POLYGON: "release"
+      - uses: actions/checkout@dev
       - name: Build the docker image from local Dockerfile
         run: docker build -t config-server-${APP_POLYGON}:latest .
