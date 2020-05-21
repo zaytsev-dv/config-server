@@ -18,7 +18,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          TAG_NAME: ${{ github.ref#refs/heads/ }}
+          TAG_NAME: ${{github.ref##*/}}
           release_name: Release ${{ github.ref }}
           body: |
             Changes in this Release
