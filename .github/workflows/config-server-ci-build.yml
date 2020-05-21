@@ -28,7 +28,7 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: set ENV
-        run:
+        run: |
           if [[ "github.ref" == "refs/heads/master" ]]; then
           echo "Create PRODUCTION image"
           echo "::set-env name=APP_POLYGON::prod"
