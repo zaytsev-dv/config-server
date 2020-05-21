@@ -26,12 +26,12 @@ jobs:
 
       - name: set APP_POLYGON
         run: |
-          if [[ "github.ref" == "refs/heads/dev" ]]; then
-             echo "Create DEVELOP image"
-             APP_POLYGON=dev
+          if [[ "github.ref" == "refs/heads/master" ]]; then
+             echo "Create PRODUCTION image"
+             APP_POLYGON=prod
           else
-          echo "Create PRODUCTION image"
-          APP_POLYGON=prod
+          echo "Create DEVELOP image"
+          APP_POLYGON=dev
           fi
 
       - name: Build the docker image
