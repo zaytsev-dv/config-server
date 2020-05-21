@@ -14,7 +14,10 @@ jobs:
         id: vars
         shell: bash
         run: |
-          echo "##[set-output name=branch;]$(echo ${GITHUB_REF##*/})"
+          echo ::set-output name=GITHUB_REF::${GITHUB_REF#refs/*/}
+
+      - name: Check output
+        run: echo ${{ steps.vars.outputs.short_ref }}
 
       - name: Checkout code
         uses: actions/checkout@v2
