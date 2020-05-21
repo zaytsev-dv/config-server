@@ -18,8 +18,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ env.GITHUB_REF_SLUG }}
-          release_name: Release ${{ env.GITHUB_REF_SLUG }}
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
           body: |
             Changes in this Release
             - First Change
