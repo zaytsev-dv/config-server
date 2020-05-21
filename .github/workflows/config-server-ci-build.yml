@@ -36,8 +36,8 @@ jobs:
 
       - name: Create and push image
         run: |
-          echo "::set-env name=DOCKER_IMAGE_TAG=APP_POLYGON-${GITHUB_SHA:0:8}"
-          echo "Image tag: ${DOCKER_IMAGE_TAG}"
+          echo "::set-env name=DOCKER_IMAGE_TAG=$APP_POLYGON-${GITHUB_SHA:0:8}"
+          echo "Docker image tag is: ${DOCKER_IMAGE_TAG}"
 
 
 
