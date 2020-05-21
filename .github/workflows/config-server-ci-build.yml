@@ -24,13 +24,14 @@ jobs:
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: set APP_POLYGON to DEV
-        if: endsWith(github.ref, '/dev')
-        run: echo "::set-env name=APP_POLYGON::dev"
-
-      - name: set APP_POLYGON to PROD
-        if: endsWith(github.ref, '/master')
-        run: echo "::set-env name=APP_POLYGON::prod"
+      - name: set APP_POLYGON
+        run: echo "if [ endsWith(github.ref, '/master') = "master" ] then
+          ::set-env name=APP_POLYGON::prod
+          else
+          ::set-env name=APP_POLYGON::dev
+          fi"
 
       - name: Build the docker image
         run: docker build -t ${APP_POLYGON}:latest .
+
+
