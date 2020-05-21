@@ -34,10 +34,13 @@ jobs:
           echo "::set-env name=APP_POLYGON::dev"
           fi
 
-      - name: Build the docker image
+      - name: Create and push image
         run: |
-        docker build -t config-server-${APP_POLYGON}:latest .
-        docker tag config-server-${APP_POLYGON}:latest ${secrets.DOCKER_REPO_CONFIG_SERVER}:$APP_POLYGON-${GITHUB_SHA:0:8}
+          echo "::set-env name=DOCKER_IMAGE_TAG=APP_POLYGON-${CI_COMMIT_SHA:0:8}"
+          docker build \
+                    --file ./Dockerfile -t config-server-${APP_POLYGON}:latest .
+                  docker tag config-server-${APP_POLYGON}:latest ${DOCKER_REPO_CONFIG_SERVER}:${DOCKER_IMAGE_TAG}
+                  docker push ${DOCKER_REPO_CONFIG_SERVER}:${DOCKER_IMAGE_TAG}
 
       - name: Push to docker hub
         run: docker push ${{ secrets.DOCKER_REPO_CONFIG_SERVER }}:latest
