@@ -24,14 +24,10 @@ jobs:
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Set env to staging
+      - name: set APP_POLYGON to DEV
         if: endsWith(github.ref, '/dev')
-        env:
-          APP_POLYGON: "dev"
-        run: echo "Tags are > ${APP_POLYGON}"
+        run: echo "::set-env name=APP_POLYGON::dev"
 
-      - name: Set env to production
+      - name: set APP_POLYGON to PROD
         if: endsWith(github.ref, '/master')
-        env:
-          APP_POLYGON: "release"
-        run: echo "Tags are > ${APP_POLYGON}"
+        run: echo "::set-env name=APP_POLYGON::prod"
