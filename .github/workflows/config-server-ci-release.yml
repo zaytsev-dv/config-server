@@ -27,10 +27,7 @@ jobs:
         with:
           tag_name: ${{ steps.vars.outputs.BRANCH_NAME }}
           release_name: Release ${{ steps.vars.outputs.BRANCH_NAME }}
-          body.file: |
-            release-notes.md
-          draft: false
-          prerelease: false
+          bodyFile: "release-notes.md"
 
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
