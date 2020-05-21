@@ -37,4 +37,8 @@ jobs:
           echo "::set-env name=APP_POLYGON::dev"
 
           fi
-        printenv
+
+      - name: Docker build
+        run: |
+          printenv
+
