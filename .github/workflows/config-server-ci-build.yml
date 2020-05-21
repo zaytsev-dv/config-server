@@ -40,6 +40,9 @@ jobs:
         run: |
           printenv
 
+      - name: Login to Docker Hub
+        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+
       - name: Docker build
         run: docker build -t ${{ secrets.DOCKER_REPO_CONFIG_SERVER }}:${APP_POLYGON}-latest .
 
