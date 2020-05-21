@@ -23,3 +23,5 @@ jobs:
         if: endsWith(github.ref, '/master')
         run: |
           echo "::set-env name=APP_POLYGON::release"
+      - name: Build the docker image from local Dockerfile
+        run: docker build -t config-server-${APP_POLYGON}:latest .
