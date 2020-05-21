@@ -40,6 +40,7 @@ jobs:
           docker build \
                     --file ./Dockerfile -t config-server-${APP_POLYGON}:latest .
                   docker tag config-server-${APP_POLYGON}:latest ${DOCKER_REPO_CONFIG_SERVER}:${DOCKER_IMAGE_TAG}
+                  echo "Image tag: ${DOCKER_IMAGE_TAG}"
                   docker push ${DOCKER_REPO_CONFIG_SERVER}:${DOCKER_IMAGE_TAG}
 
 
