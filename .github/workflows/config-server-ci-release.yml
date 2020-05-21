@@ -10,6 +10,12 @@ jobs:
     name: Create Release
     runs-on: ubuntu-latest
     steps:
+      - name: Extract branch name
+        shell: bash
+        run: echo "::set-env name=BRANCH_NAME::${GITHUB_REF##*/}"
+      - name: Print ENV
+        run: |
+          printenv
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Create Release
@@ -18,8 +24,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          tag_name: ${{ env.GITHUB_REF_SLUG }}
+          release_name: Release ${{ env.GITHUB_REF_SLUG }}
           body: |
             Changes in this Release
             - First Change
