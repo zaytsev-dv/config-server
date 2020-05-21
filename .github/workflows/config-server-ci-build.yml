@@ -44,5 +44,5 @@ jobs:
 
       - name: Create and push image
         run: |
-          echo "$DOCKER_REPO_CONFIG_SERVER"
+          echo "$secrets.DOCKER_REPO_CONFIG_SERVER"
           printenv
