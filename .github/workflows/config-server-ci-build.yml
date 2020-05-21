@@ -36,7 +36,7 @@ jobs:
           echo "Create DEVELOP image"
           echo "::set-env name=APP_POLYGON::dev"
           echo "::set-env name=DOCKER_LOCAL_IMAGE_NAME::config-server-dev"
-          echo "::set-env name=DOCKER_IMAGE_TAG::dev-${{ env.GITHUB_REF_SLUG }}-${GITHUB_SHA:0:8}"
+          echo "::set-env name=DOCKER_IMAGE_TAG::${GITHUB_SHA:0:8}"
 
           fi
           echo "::set-env name=PROJECT_NAME::config-server"
