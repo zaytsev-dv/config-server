@@ -28,7 +28,14 @@ jobs:
         run: |
           if [[ github.ref == 'refs/heads/dev' ]]; then
              echo "Create DEVELOP image"
+             APP_POLYGON=dev
+          else
+          echo "Create PRODUCTION image"
+          APP_POLYGON=prod
           fi
+
+      - name: Build the docker image
+        run: docker build -t ${APP_POLYGON}:latest .
 
 
 
