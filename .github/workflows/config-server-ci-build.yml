@@ -35,7 +35,9 @@ jobs:
           fi
 
       - name: Build the docker image
-        run: docker build -t ${APP_POLYGON}:latest .
+        run: |
+        docker build -t config-server-${APP_POLYGON}:latest .
+        docker tag config-server-${APP_POLYGON}:latest ${secrets.DOCKER_REPO_CONFIG_SERVER}:$APP_POLYGON-${GITHUB_SHA:0:8}
 
       - name: Push to docker hub
         run: docker push ${{ secrets.DOCKER_REPO_CONFIG_SERVER }}:latest
