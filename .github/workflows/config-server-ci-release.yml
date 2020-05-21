@@ -19,6 +19,21 @@ jobs:
       - name: Check branch name
         run: echo ${{ steps.vars.outputs.BRANCH_NAME }}
 
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.vars.outputs.BRANCH_NAME }}
+          release_name: Release ${{ steps.vars.outputs.BRANCH_NAME }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false
+
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
