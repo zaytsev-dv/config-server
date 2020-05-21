@@ -10,9 +10,12 @@ jobs:
     name: Create Release
     runs-on: ubuntu-latest
     steps:
-      - name: Extract branch name
+      - name: Declare some variables
+        id: vars
+        shell: bash
         run: |
-        echo "::set-env name=BRANCH_NAME::${GITHUB_REF##*/}"
+          echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
       - name: Checkout code
         uses: actions/checkout@v2
