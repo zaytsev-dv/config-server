@@ -36,7 +36,7 @@ jobs:
               echo "::set-env name=APP_POLYGON::dev"
           fi
 
-      - name: Print ENV
+      - name: Print ENV vars
         run: |
           printenv
 
