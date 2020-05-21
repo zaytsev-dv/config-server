@@ -27,7 +27,8 @@ jobs:
         with:
           tag_name: ${{ steps.vars.outputs.BRANCH_NAME }}
           release_name: Release ${{ steps.vars.outputs.BRANCH_NAME }}
-          bodyFile: "release-notes.md"
+          body.file: |
+            release-notes.md
           draft: false
           prerelease: false
 
