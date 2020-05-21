@@ -15,6 +15,7 @@ jobs:
     name: TEST TASK NAME
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v1
       - name: Set env to staging
         if: endsWith(github.ref, '/dev')
         env:
@@ -23,6 +24,10 @@ jobs:
         if: endsWith(github.ref, '/master')
         env:
           APP_POLYGON: "release"
-      - uses: actions/checkout@dev
+
+
       - name: Build the docker image from local Dockerfile
-        run: docker build -t config-server-dev:latest .
+        uses: actions/setup-java@v1
+        with:
+          java-version: 8
+        run: docker build -t config-server-${APP_POLYGON}:latest .
