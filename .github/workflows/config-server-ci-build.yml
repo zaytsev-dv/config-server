@@ -26,7 +26,6 @@ jobs:
 
       - name: set ENV
         run: |
-          echo "::set-env name=PROJECT_NAME::config-server"
           if [[ "github.ref" == "refs/heads/master" ]]; then
              echo "Create PRODUCTION image"
              echo "::set-env name=APP_POLYGON::prod"
@@ -34,11 +33,12 @@ jobs:
           echo "Create DEVELOP image"
           echo "::set-env name=APP_POLYGON::dev"
           fi
+          echo "::set-env name=PROJECT_NAME::config-server"
+          echo "::set-env name=DOCKER_LOCAL_IMAGE_NAME::config-server-${APP_POLYGON}"
+          echo "::set-env name=DOCKER_IMAGE_TAG::${APP_POLYGON}-${GITHUB_SHA:0:8}"
 
       - name: Create and push image
         run: |
-          echo "::set-env name=DOCKER_LOCAL_IMAGE_NAME=${PROJECT_NAME}-${APP_POLYGON}"
-          echo "::set-env name=DOCKER_IMAGE_TAG=${APP_POLYGON}-${GITHUB_SHA:0:8}"
           docker build \
                     --file ./Dockerfile -t ${DOCKER_LOCAL_IMAGE_NAME}:latest .
                     docker tag ${DOCKER_LOCAL_IMAGE_NAME}:latest ${DOCKER_REPO_CONFIG_SERVER}:${DOCKER_IMAGE_TAG}
