@@ -11,14 +11,15 @@ on:
 
 jobs:
 
-  build_maven_dev:
-    name: Build maven
+  test_task:
+    name: TEST TASK NAME
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Set env
-        run: echo ::set-env name=RELEASE_VERSION::${GITHUB_REF:10}
-      - name: Test
+      - name: Set env to staging
+        if: endsWith(github.ref, '/dev')
         run: |
-          echo $RELEASE_VERSION
-          echo ${{ env.RELEASE_VERSION }}
+          echo "::set-env name=APP_POLYGON::dev"
+      - name: Set env to production
+        if: endsWith(github.ref, '/master')
+        run: |
+          echo "::set-env name=APP_POLYGON::release"
