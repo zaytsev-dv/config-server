@@ -15,7 +15,6 @@ jobs:
     name: TEST TASK NAME
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@dev
       - name: Set env to staging
         if: endsWith(github.ref, '/dev')
         env:
@@ -29,7 +28,4 @@ jobs:
         run: echo "Tags are > ${APP_POLYGON}"
 
       - name: Build the docker image from local Dockerfile
-        uses: actions/setup-java@dev
-        with:
-          java-version: 8
         run: docker build -t config-server-${APP_POLYGON}:latest .
