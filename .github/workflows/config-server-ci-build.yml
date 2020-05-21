@@ -44,5 +44,5 @@ jobs:
 
       - name: Create and push image
         run: |
-          docker build -t ${DOCKER_REPO_CONFIG_SERVER}:config-server:latest .
+          docker build -t config-server:latest .
           docker push ${DOCKER_REPO_CONFIG_SERVER}:config-server:latest
